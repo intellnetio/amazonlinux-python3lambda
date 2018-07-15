@@ -10,7 +10,7 @@ RUN yum -y update \
 RUN easy_install-3.6 pip
 RUN pip3 install -qqqU awscli
 RUN pip3 install nltk
-RUN python3 -m nltk.downloader all
+#RUN python3 -m nltk.downloader all
 RUN pip3 install tinysegmenter
 RUN pip3 install numpy
 
