@@ -5,7 +5,8 @@ RUN yum -y update \
     && yum -y upgrade \
     && yum -y groupinstall "Development Tools"  \
     && yum -y install python36-devel python36-pip gcc \
-    && yum -y install libxml2-devel libxslt-devel
+    && yum -y install libxml2-devel libxslt-devel \
+    && yum -y install wget
 
 RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 
