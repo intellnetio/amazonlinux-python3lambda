@@ -8,7 +8,7 @@ RUN yum -y update \
     && yum -y install libxml2-devel libxslt-devel \
     && yum -y install wget
 
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3.6 get-pip.py
 
 RUN pip3 install -qqqU awscli
 RUN pip3 install nltk
