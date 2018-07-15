@@ -32,11 +32,11 @@ RUN pip3 install numpy
 RUN mkdir ~/packages
 RUN wget --directory-prefix=~/packages --no-verbose --no-check-certificate 'https://github.com/Miserlou/lambda-packages/files/1425358/_sqlite3.so.zip'
 
-RUN groupadd --gid 3434 devops \
-  && useradd --uid 3434 --gid devops --shell /bin/bash --create-home devops \
-  && echo 'devops ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-devops \
-  && echo 'Defaults env_keep += noninteractive' >> /etc/sudoers.d/env_keep
+#RUN groupadd --gid 3434 devops \
+#  && useradd --uid 3434 --gid devops --shell /bin/bash --create-home devops \
+#  && echo 'devops ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-devops \
+#  && echo 'Defaults env_keep += noninteractive' >> /etc/sudoers.d/env_keep
+#
+#USER devops
 
-USER devops
-
-CMD ["/bin/sh"]
+CMD ["/bin/bash"]
