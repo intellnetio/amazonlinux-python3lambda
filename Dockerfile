@@ -4,7 +4,7 @@ FROM amazonlinux:latest
 RUN yum -y update \
     && yum -y upgrade \
     && yum -y groupinstall "Development Tools"  \
-    && yum -y install python36-devel python36-pip gcc
+    && yum -y install python36-devel python36-pip gcc \
     && yum -y install libxml2-devel libxslt-devel
 
 RUN easy_install-3.6 pip
