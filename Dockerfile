@@ -8,6 +8,7 @@ RUN yum -y update \
     && yum -y install libxml2-devel libxslt-devel \
     && yum -y install wget gcc zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel
 
+# Install Python3
 RUN curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
 RUN tar zxf Python-${PYTHON_VERSION}.tgz
 RUN rm Python-${PYTHON_VERSION}.tgz
@@ -31,6 +32,11 @@ RUN pip3 install numpy
 RUN mkdir ~/packages
 RUN wget --directory-prefix=~/packages --no-verbose --no-check-certificate 'https://github.com/Miserlou/lambda-packages/files/1425358/_sqlite3.so.zip'
 
-USER circleci
+RUN groupadd --gid 3434 devops \
+  && useradd --uid 3434 --gid devops --shell /bin/bash --create-home devops \
+  && echo 'devops ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-devops \
+  && echo 'Defaults env_keep += noninteractive' >> /etc/sudoers.d/env_keep
+
+USER devops
 
 CMD ["/bin/sh"]
