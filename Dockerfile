@@ -1,14 +1,25 @@
 FROM amazonlinux:latest
 
-# Install python 3.6 and development tools
+ENV PYTHON_VERSION 3.6.5
+
+# Install OS packages
 RUN yum -y update \
     && yum -y upgrade \
     && yum -y groupinstall "Development Tools"  \
-    && yum -y install python36-devel python36-pip gcc \
     && yum -y install libxml2-devel libxslt-devel \
-    && yum -y install wget
+    && yum -y install wget gcc zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel
 
-RUN wget https://bootstrap.pypa.io/get-pip.py && python3.6 get-pip.py
+# Install Python
+RUN curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz
+RUN tar zxf Python-${PYTHON_VERSION}.tgz
+RUN rm Python-${PYTHON_VERSION}.tgz
+WORKDIR Python-${PYTHON_VERSION}
+RUN ./configure --prefix=/opt/local
+RUN make
+RUN make altinstall
+
+# Install pip
+RUN wget https://bootstrap.pypa.io/get-pip.py && python3 get-pip.py
 
 RUN pip3 install -qqqU awscli
 RUN pip3 install nltk
