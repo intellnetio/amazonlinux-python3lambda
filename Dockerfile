@@ -30,11 +30,4 @@ RUN pip2 install -qqq awscli nltk tinysegmenter numpy
 RUN mkdir /packages
 RUN cd /packages && wget --no-verbose --no-check-certificate 'https://github.com/Miserlou/lambda-packages/files/1425358/_sqlite3.so.zip'
 
-#RUN groupadd --gid 3434 devops \
-#  && useradd --uid 3434 --gid devops --shell /bin/bash --create-home devops \
-#  && echo 'devops ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-devops \
-#  && echo 'Defaults env_keep += noninteractive' >> /etc/sudoers.d/env_keep
-#
-#USER devops
-
 CMD ["/bin/bash"]
